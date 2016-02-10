@@ -46,7 +46,7 @@ def intense(text):
 def get_vault_password(password_file=None):
     if password_file is None:
         try:
-            password_file = config.get('vault', 'password_file')
+            password_file = os.environ.get('ANSIBLE_VAULT_PASSWORD_FILE', config.get('vault', 'password_file'))
         except ConfigParser.NoSectionError:
             return None
     return read_vault_file(password_file)
